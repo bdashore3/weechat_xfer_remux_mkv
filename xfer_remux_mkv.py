@@ -1,4 +1,5 @@
 import re
+import os
 from subprocess import call, DEVNULL
 from pathlib import Path
 from shutil import which
@@ -74,6 +75,9 @@ def xfer_ended_signal_cb(data, signal, signal_data):
     except NameError as e:
         print(f"ffmpeg function error!: {e} \n")
         return 1
+
+    # Set permissions for Plex
+    os.chmod(outfile, 436)
 
     print(f"Your file {filename} has been remuxed to mp4"
           "and stored in {outfile}")
